@@ -15,22 +15,12 @@ class PlaceScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        leading: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert, color: Colors.white),
-            onPressed: () {
-              // Add your action here
-            },
-          ),
+          Icon(Icons.more_vert, color: Colors.white),
         ],
       ),
       body: SingleChildScrollView(
@@ -45,7 +35,7 @@ class PlaceScreen extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20,16,20,16),
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
               child: Text(
                 placeModel.city ?? "",
                 style: TextStyle(
@@ -67,9 +57,9 @@ class PlaceScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20,0,20,20),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Text(
-                 "Picture",
+                "Picture",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -82,47 +72,49 @@ class PlaceScreen extends StatelessWidget {
               child: Container(
                 child: Row(
                   children: List<Widget>.generate(
-                    placeModel.pictures!.length > 4
-                        ? 4
-                        : placeModel.pictures!.length,
+                        placeModel.pictures!.length > 4
+                            ? 4
+                            : placeModel.pictures!.length,
                         (int index) {
-                      return Card(
-                        elevation: 0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Image.network(
-                            placeModel.pictures![index],
-                            width: 63,
-                            height: 63,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
-                  ) +
-                      (placeModel.pictures!.length > 4
-                          ? [Container(
-                          width: 70,
-                          height: 70,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
+                          return Card(
                             elevation: 0,
-                            color: Colors.black54,
-                            child: Center(
-                              child: Text(
-                                '+${placeModel.pictures!.length - 4}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                              child: Image.network(
+                                placeModel.pictures![index],
+                                width: 63,
+                                height: 63,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                        ),
-                      ] : []),
+                          );
+                        },
+                      ) +
+                      (placeModel.pictures!.length > 4
+                          ? [
+                              Container(
+                                width: 70,
+                                height: 70,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  elevation: 0,
+                                  color: Colors.black54,
+                                  child: Center(
+                                    child: Text(
+                                      '+${placeModel.pictures!.length - 4}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]
+                          : []),
                 ),
               ),
             ),
