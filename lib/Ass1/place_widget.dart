@@ -9,7 +9,7 @@ class PlaceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
+    String? country = placeModel.country;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -40,14 +40,14 @@ class PlaceScreen extends StatelessWidget {
             Image.network(
               placeModel.image ?? "",
               width: screenWidth,
-              height: 400,
+              height: 450,
               fit: BoxFit.cover,
             ),
             SizedBox(height: 5),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(20,16,20,16),
               child: Text(
-                placeModel.name ?? "",
+                placeModel.city ?? "",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -67,7 +67,18 @@ class PlaceScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.fromLTRB(20,0,20,20),
+              child: Text(
+                 "Picture",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 18),
               child: Container(
                 child: Row(
                   children: List<Widget>.generate(
@@ -120,7 +131,7 @@ class PlaceScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "More in California",
+                    "More in $country",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
