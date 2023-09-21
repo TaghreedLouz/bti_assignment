@@ -1,4 +1,4 @@
-import 'package:bti_assignment/Ass1/place_model.dart';
+import 'package:bti_assignment/Ass1%20place%20LV/place_model.dart';
 import 'package:flutter/material.dart';
 
 class PlaceScreen extends StatelessWidget {
@@ -8,7 +8,6 @@ class PlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     String? country = placeModel.country;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -29,7 +28,7 @@ class PlaceScreen extends StatelessWidget {
           children: [
             Image.network(
               placeModel.image ?? "",
-              width: screenWidth,
+              width: double.infinity,
               height: 450,
               fit: BoxFit.cover,
             ),
@@ -118,6 +117,69 @@ class PlaceScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+              child: Text(
+                "Picture",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 18),
+              child: SizedBox(
+                height: 70,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          placeModel.pictures![index],
+                          fit: BoxFit.cover,
+                          height: 70,
+                          width: 70,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Container(
+              width: 70,
+              height: 70,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                elevation: 0,
+                color: Colors.black54,
+                child: Center(
+                  child: Text(
+                    '+${placeModel.pictures!.length - 4}',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+
+
+
+
+
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
