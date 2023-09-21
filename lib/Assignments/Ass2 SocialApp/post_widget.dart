@@ -1,4 +1,4 @@
-import 'package:bti_assignment/Ass2%20SocialApp/post_model.dart';
+import 'package:bti_assignment/Assignments/Ass2%20SocialApp/post_model.dart';
 import 'package:flutter/material.dart';
 
 class PostWidget extends StatefulWidget {

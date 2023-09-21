@@ -1,8 +1,7 @@
 import 'package:bti_assignment/Exercises/comment_list/comment_screen.dart';
 import 'package:flutter/material.dart';
-import 'Ass1 place LV/place_data.dart';
-import 'Ass1 place LV/place_model.dart';
-import 'Ass2 SocialApp/posts_screen.dart';
+import 'Assignments/Ass1 place LV/place_data.dart';
+import 'Assignments/Ass1 place LV/place_model.dart';
 import 'Exercises/OttuGrid/ottu_screen.dart';
 
 void main() {

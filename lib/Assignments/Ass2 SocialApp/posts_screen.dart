@@ -1,7 +1,6 @@
-
-import 'package:bti_assignment/Ass2%20SocialApp/post_data.dart';
-import 'package:bti_assignment/Ass2%20SocialApp/post_model.dart';
-import 'package:bti_assignment/Ass2%20SocialApp/post_widget.dart';
+import 'package:bti_assignment/Assignments/Ass2%20SocialApp/post_data.dart';
+import 'package:bti_assignment/Assignments/Ass2%20SocialApp/post_model.dart';
+import 'package:bti_assignment/Assignments/Ass2%20SocialApp/post_widget.dart';
 import 'package:flutter/material.dart';
 
 class PostScreen extends StatelessWidget {
