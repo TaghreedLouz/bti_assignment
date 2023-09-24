@@ -426,27 +426,52 @@ class _OrderScreenState extends State<OrderScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.lightBlueAccent[100],
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${totalPrice}  د.ا",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "اضافة للسلة",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ]),
-                  ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                        offset: Offset(0, 4),
+                      ),
+                    ]),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.cyanAccent[400],
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${totalPrice}  د.ا",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  "اضافة للسلة",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
             ],
