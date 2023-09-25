@@ -1,8 +1,8 @@
-import 'package:bti_assignment/Exercises/OttuGrid/ottu_model.dart';
-import 'package:bti_assignment/Exercises/OttuGrid/products_widget.dart';
+import 'package:bti_assignment/Exercises/OttuGrid/data/ottu_model.dart';
+import 'package:bti_assignment/Exercises/OttuGrid/view/products_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'ottu_data.dart';
+import '../data/ottu_data.dart';
 
 class OttuScreen extends StatefulWidget {
   static var productList;

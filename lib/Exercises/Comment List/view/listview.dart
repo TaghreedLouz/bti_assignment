@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Assignments/Ass1 place LV/place_model.dart';
+import '../../../Assignments/Ass1 place LV/data/place_model.dart';
 
 class exListView extends StatelessWidget {
   final PlaceModel placeModel;

@@ -1,14 +1,18 @@
+import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/providers/social_provider.dart';
 import 'package:flutter/material.dart';
-import 'Assignments/Ass1 place LV/place_data.dart';
-import 'Assignments/Ass1 place LV/place_model.dart';
-import 'Assignments/Ass2 SocialApp/posts_screen.dart';
-import 'Assignments/Ass3 PizzaOrder/order_screen.dart';
-import 'Exercises/BottomNavigationBar/bnb.dart';
-import 'Exercises/Comment List/comment_screen.dart';
-import 'Exercises/Comment List/pages.dart';
+import 'package:provider/provider.dart';
+import 'Assignments/Ass1 place LV/data/place_data.dart';
+import 'Assignments/Ass1 place LV/data/place_model.dart';
+import 'Assignments/Ass2 SocialApp/view/posts_screen.dart';
+import 'Assignments/Ass4 Social Provider/view/social_home_page.dart';
+import 'Exercises/App To Do/providers/todo_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider<SocialProvider>(
+      create: (context) {
+        return SocialProvider();
+      },
+      child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -19,7 +23,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  updateScreen(){
+  updateScreen() {
     setState(() {});
   }
 
@@ -28,20 +32,17 @@ class _MyAppState extends State<MyApp> {
     final placeModel = PlaceModel(place);
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: Utities.isDark ? ThemeData.dark() : ThemeData.light(),
+      theme: Provider.of<SocialProvider>(context).isDark ? ThemeData.dark() : ThemeData.light(),
       debugShowCheckedModeBanner: false,
       //  home: PlaceScreen(placeModel),
-     // home: PostScreen(),
-   //   home: CommentScreen(updateScreen),
-    //  home: MainPage(),
-     home: OrderScreen(),
-    // home: OttuScreen(),
-    // home: BNBScreen(),
+      //   home: CommentScreen(updateScreen),
+      //  home: SocialHomePage(updateScreen),
+      home: SocialHomePage(),
       //  home: exListView(placeModel),
     );
   }
 }
 
-class Utities{
+class Utities {
   static bool isDark = false;
 }

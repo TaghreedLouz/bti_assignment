@@ -1,26 +1,21 @@
-import 'package:bti_assignment/Assignments/Ass2%20SocialApp/post_model.dart';
+import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/data/post_model.dart';
+import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/providers/social_provider.dart';
+import 'package:bti_assignment/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PostWidget extends StatefulWidget {
-  final PostModel postModel;
+class PostWidget extends StatelessWidget {
 
+  PostModel postModel;
   PostWidget(this.postModel);
-
-
-  @override
-  State<PostWidget> createState() => _PostWidgetState();
-}
-
-class _PostWidgetState extends State<PostWidget> {
-  TextEditingController controller = TextEditingController();
-
+  String comment = "";
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Provider.of<SocialProvider>(context).isDark ? Colors.grey[700] : Colors.grey[300],
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -34,7 +29,7 @@ class _PostWidgetState extends State<PostWidget> {
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
                   backgroundImage:
-                      NetworkImage(widget.postModel.user!.image ?? ""),
+                      NetworkImage(postModel.user!.image ?? ""),
                   radius: 25,
                 ),
                 SizedBox(width: 15),
@@ -43,14 +38,14 @@ class _PostWidgetState extends State<PostWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.postModel.user!.name ?? "",
+                      Text(postModel.user!.name ?? "",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 16)),
                       Row(
                         children: [
                           Icon(Icons.location_on,
                               color: Colors.blue[300], size: 15),
-                          Text(widget.postModel.user!.location ?? "",
+                          Text(postModel.user!.location ?? "",
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 10,
@@ -69,15 +64,12 @@ class _PostWidgetState extends State<PostWidget> {
             SizedBox(height: 15),
             InkWell(
               onDoubleTap: () {
-                setState(() {
-                  widget.postModel.isLiked =
-                      !(widget.postModel.isLiked ?? false);
-                });
+                Provider.of<SocialProvider>(context,listen: false).toggleIsLiked(postModel);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  widget.postModel.image ?? "",
+                  postModel.image ?? "",
                   width: double.infinity,
                   height: 200,
                   fit: BoxFit.cover,
@@ -98,21 +90,16 @@ class _PostWidgetState extends State<PostWidget> {
               children: [
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      widget.postModel.isLiked =
-                          !(widget.postModel.isLiked ?? false);
-                    });
+                    Provider.of<SocialProvider>(context,listen: false).toggleIsLiked(postModel);
                   },
                   child: Icon(
                     Icons.favorite,
                     size: 30,
-                    color: (widget.postModel.isLiked ?? false)
-                        ? Colors.red
-                        : Colors.grey,
+                    color: (postModel.isLiked ?? false) ? Colors.red : Colors.grey,
                   ),
                 ),
                 SizedBox(width: 5),
-                Text((widget.postModel.comments?.length ?? 0).toString()),
+                Text((postModel.comments?.length ?? 0).toString()),
                 SizedBox(
                   width: 10,
                 ),
@@ -121,24 +108,37 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(
                   width: 5,
                 ),
-                Text((widget.postModel.comments?.length ?? 0).toString()),
+                Text((postModel.comments?.length ?? 0).toString()),
               ],
             ),
             SizedBox(height: 10),
-            Text(widget.postModel.content ?? ""),
+            Text(postModel.content ?? ""),
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
-                controller: controller,
+                onChanged: (value) {
+                  comment = value;
+                },
+               // controller: controller,
                 decoration: InputDecoration(
                     suffixIcon: InkWell(
                         onTap: () {
-                          setState(() {
                             //todo add to comments list
-                            widget.postModel.comments?.add(controller.text as Comment);
-                            controller.clear();
-                          });
+                            Comment newComment = Comment({
+                              "user": {
+                                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJWwNyMppD7qiGkc28RpXtMipOE622_1RWaQ&usqp=CAU",
+                                "name": "New Commenter",
+                                "location": "Palestine",
+                              },
+                              "text": comment,
+                              "isLiked": false,
+                            });
+                            if(comment.isNotEmpty)
+                            postModel.comments?.add(newComment);
+                           // widget.postModel.comments!.length++;
+                          //  comment="";
+                            //controller.clear();
                         },
                         child: Icon(Icons.send)),
                     border: OutlineInputBorder(
@@ -147,19 +147,17 @@ class _PostWidgetState extends State<PostWidget> {
                 ),),
             ),
             SizedBox(height: 10),
-            widget.postModel.comments != null &&
-                    widget.postModel.comments!.isNotEmpty
-                ? ListView.builder(
+            postModel.comments != null && postModel.comments!.isNotEmpty ? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: widget.postModel.comments!.length,
+                    itemCount: postModel.comments!.length,
                     itemBuilder: (context, index) {
-                      final comment = widget.postModel.comments![index];
+                      final comment = postModel.comments![index];
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.black12,
+                            color: Provider.of<SocialProvider>(context).isDark ? Colors.grey[400] : Colors.black12,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
@@ -169,19 +167,22 @@ class _PostWidgetState extends State<PostWidget> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              comment.user!.image ?? ""),
-                                          radius: 15,
-                                        ),
-                                        SizedBox(width: 8),
-                                        Text(comment.user!.name ?? "",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold)),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                comment.user!.image ?? ""),
+                                            radius: 15,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(comment.user!.name ?? "",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -192,9 +193,10 @@ class _PostWidgetState extends State<PostWidget> {
                                     ),
                                   ],
                                 ),
+                                Spacer(),
                                 if (comment.isLiked ?? true)
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 120),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.thumb_up,
                                       color: Colors.blueAccent,
@@ -207,8 +209,7 @@ class _PostWidgetState extends State<PostWidget> {
                         ),
                       );
                     },
-                  )
-                : Text("No comments yet :)",
+                  ) : Text("No comments yet :)",
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 12,

@@ -1,4 +1,4 @@
-import 'package:bti_assignment/Assignments/Ass1%20place%20LV/place_model.dart';
+import 'package:bti_assignment/Assignments/Ass1%20place%20LV/data/place_model.dart';
 import 'package:flutter/material.dart';
 
 class PlaceScreen extends StatelessWidget {

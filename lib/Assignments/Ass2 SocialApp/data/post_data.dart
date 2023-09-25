@@ -1,3 +1,9 @@
+
+import 'package:bti_assignment/Assignments/Ass2%20SocialApp/data/post_model.dart';
+
+List<PostModel> postsModelList = postsData.map((e) => PostModel(e)).toList();
+
+
 List<Map> postsData = [
   {
     "image":
@@ -99,7 +105,7 @@ List<Map> postsData = [
   },
   {
     "image":
-        "https://media.istockphoto.com/id/1442792969/photo/business-woman-using-laptop-outdoors.webp?b=1&s=170667a&w=0&k=20&c=9Zc3Zyguv4z5TemsCpsaDB4bcu1DgsplR0bKKFnzpNM=",
+        "https://plus.unsplash.com/premium_photo-1677343210300-717fba46be17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2VlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
     "content":
         "Phasellus tincidunt est id dui gravida, a ultrices leo iaculis. #Post4 #PhasellusTincidunt",
     "isFavourite": true,

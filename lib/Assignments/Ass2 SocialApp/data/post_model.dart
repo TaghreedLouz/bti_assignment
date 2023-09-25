@@ -10,8 +10,8 @@ class PostModel {
     content = map["content"];
     user = User(map["user"]);
     isLiked = map["isFavourite"];
-    List commenysMap = map["comments"];
-    List<Map>? commentsLis = commenysMap.isEmpty?null:commenysMap as List<Map>;
+    List commentsMap = map["comments"];
+    List<Map>? commentsLis = commentsMap.isEmpty?null:commentsMap as List<Map>;
     comments = commentsLis?.map((commentMap) => Comment(commentMap)).toList();
   }
 }

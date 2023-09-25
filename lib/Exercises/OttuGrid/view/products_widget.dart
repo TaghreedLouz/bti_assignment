@@ -1,8 +1,8 @@
-import 'package:bti_assignment/Exercises/OttuGrid/ottu_screen.dart';
+import 'package:bti_assignment/Exercises/OttuGrid/view/ottu_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ottu_model.dart';
+import '../data/ottu_model.dart';
 
 class ProductsWidget extends StatefulWidget {
 
