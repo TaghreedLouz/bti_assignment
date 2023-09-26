@@ -15,7 +15,11 @@ class PostScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: PostWidget(Provider.of<SocialProvider>(context).postsModelList[index]),
+            child: Consumer<SocialProvider>(
+                builder: (context, value, child) {
+                  return PostWidget(value.postsModelList[index]);
+                },
+            )
           );
         },
       );

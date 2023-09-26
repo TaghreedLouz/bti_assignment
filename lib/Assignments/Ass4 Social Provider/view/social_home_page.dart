@@ -45,7 +45,7 @@ class _SocialHomePageState extends State<SocialHomePage> {
       ),
       body: PageView(
           controller: pageController,
-          physics: NeverScrollableScrollPhysics(),
+         // physics: NeverScrollableScrollPhysics(),
           children: [PostScreen(), LikedPostWidget()]),
     );
   }

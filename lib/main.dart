@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Assignments/Ass1 place LV/data/place_data.dart';
 import 'Assignments/Ass1 place LV/data/place_model.dart';
-import 'Assignments/Ass4 Social Provider/view/social_home_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
+import 'Exercises/Social App Seelector/view/social_home_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   runApp(ChangeNotifierProvider<SocialProvider>(
       create: (context) {
         return SocialProvider();
       },
-      child: MyApp()));
+      child: EasyLocalization(
+          supportedLocales: [Locale('en'), Locale('ar')],
+          path: 'assets/translations', // <-- change the path of the translation files
+          fallbackLocale: Locale('en'),
+          child: MyApp())));
 }
 
 class MyApp extends StatefulWidget {
@@ -29,6 +37,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final placeModel = PlaceModel(place);
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       title: 'Flutter Demo',
       theme: Provider.of<SocialProvider>(context).isDark ? ThemeData.dark() : ThemeData.light(),
       debugShowCheckedModeBanner: false,

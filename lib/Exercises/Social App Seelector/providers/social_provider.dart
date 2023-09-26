@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 class SocialProvider extends ChangeNotifier {
   List<PostModel> postsModelList = postsData.map((e) => PostModel(e)).toList();
   bool isDark = false;
+  PostModel? postModel;
+
+
 
   toggleIsLiked(PostModel postModel) {
     postModel.isLiked = !postModel.isLiked!;
@@ -30,10 +33,11 @@ class SocialProvider extends ChangeNotifier {
       "text": comment,
       "isLiked": false,
     });
-    // comment = "";
     textEditingController.clear();
     notifyListeners();
+
 
     return newComment;
   }
 }
+
