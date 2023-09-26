@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Assignments/Ass1 place LV/data/place_data.dart';
 import 'Assignments/Ass1 place LV/data/place_model.dart';
-import 'Assignments/Ass2 SocialApp/view/posts_screen.dart';
 import 'Assignments/Ass4 Social Provider/view/social_home_page.dart';
-import 'Exercises/App To Do/providers/todo_provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider<SocialProvider>(

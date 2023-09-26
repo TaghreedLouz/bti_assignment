@@ -9,15 +9,13 @@ class LikedPostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Expanded(
-        child: ListView.builder(
-          itemCount: Provider.of<SocialProvider>(context).postsModelList.where((element) => element.isLiked == true).length,
-          itemBuilder: (context, index) {
-            return PostWidget(Provider.of<SocialProvider>(context).postsModelList.where((element) => element.isLiked == true).toList()[index]);
-        },),
-      )
-    ],);
+    return Expanded(
+      child: ListView.builder(
+        itemCount: Provider.of<SocialProvider>(context).postsModelList.where((element) => element.isLiked == true).length,
+        itemBuilder: (context, index) {
+          return PostWidget(Provider.of<SocialProvider>(context).postsModelList.where((element) => element.isLiked == true).toList()[index]);
+      },),
+    );
   }
 }
 

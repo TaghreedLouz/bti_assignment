@@ -11,6 +11,7 @@ class PostWidget extends StatelessWidget {
   String comment = "";
   TextEditingController textEditingController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,7 +141,8 @@ class PostWidget extends StatelessWidget {
                           //postModel.comments?.add(Provider.of<SocialProvider>(context,listen: false).addNewComment(textEditingController.text));
                            // widget.postModel.comments!.length++;
                            // comment="";
-                           textEditingController.clear();
+                          textEditingController.clear();
+
                         },
                         child: Icon(Icons.send)),
                     border: OutlineInputBorder(
