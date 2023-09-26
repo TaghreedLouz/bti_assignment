@@ -15,4 +15,20 @@ class SocialProvider extends ChangeNotifier{
     isDark = ! isDark;
     notifyListeners();
   }
+  Comment addNewComment(String comment){
+
+    Comment newComment = Comment({
+      "user": {
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJWwNyMppD7qiGkc28RpXtMipOE622_1RWaQ&usqp=CAU",
+        "name": "New Commenter",
+        "location": "Palestine",
+      },
+      "text": comment,
+      "isLiked": false,
+    });
+   // comment = "";
+    notifyListeners();
+
+    return newComment;
+  }
 }

@@ -9,6 +9,7 @@ class PostWidget extends StatelessWidget {
   PostModel postModel;
   PostWidget(this.postModel);
   String comment = "";
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -120,25 +121,26 @@ class PostWidget extends StatelessWidget {
                 onChanged: (value) {
                   comment = value;
                 },
-               // controller: controller,
+                controller: textEditingController,
                 decoration: InputDecoration(
                     suffixIcon: InkWell(
                         onTap: () {
-                            //todo add to comments list
-                            Comment newComment = Comment({
-                              "user": {
-                                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJWwNyMppD7qiGkc28RpXtMipOE622_1RWaQ&usqp=CAU",
-                                "name": "New Commenter",
-                                "location": "Palestine",
-                              },
-                              "text": comment,
-                              "isLiked": false,
-                            });
-                            if(comment.isNotEmpty)
-                            postModel.comments?.add(newComment);
+                          //Provider.of<SocialProvider>(context).addNewComment(comment);
+                            // Comment newComment = Comment({
+                            //   "user": {
+                            //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJWwNyMppD7qiGkc28RpXtMipOE622_1RWaQ&usqp=CAU",
+                            //     "name": "New Commenter",
+                            //     "location": "Palestine",
+                            //   },
+                            //   "text": comment,
+                            //   "isLiked": false,
+                            // });
+                           if(comment.isNotEmpty)
+                             postModel.comments?.add(Provider.of<SocialProvider>(context,listen: false).addNewComment(comment));
+                          //postModel.comments?.add(Provider.of<SocialProvider>(context,listen: false).addNewComment(textEditingController.text));
                            // widget.postModel.comments!.length++;
-                          //  comment="";
-                            //controller.clear();
+                           // comment="";
+                           textEditingController.clear();
                         },
                         child: Icon(Icons.send)),
                     border: OutlineInputBorder(
@@ -168,7 +170,7 @@ class PostWidget extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.fromLTRB(8,8,8,0),
                                       child: Row(
                                         children: [
                                           CircleAvatar(
@@ -185,8 +187,7 @@ class PostWidget extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 38),
+                                      padding: const EdgeInsets.fromLTRB(47,0,47,10),
                                       child: Text(comment.text ?? "",
                                           style: TextStyle(
                                               color: Colors.blue.shade800)),
