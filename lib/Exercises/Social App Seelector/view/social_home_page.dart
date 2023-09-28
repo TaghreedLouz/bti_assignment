@@ -1,13 +1,14 @@
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/data/post_model.dart';
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/providers/social_provider.dart';
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/providers/social_provider.dart';
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/view/liked_posts_screen.dart';
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/view/posts_screen.dart';
+import 'package:bti_assignment/Exercises/Social%20App%20Seelector/providers/social_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bti_assignment/Exercises/Social%20App%20Seelector/view/posts_screen.dart';
+import 'package:bti_assignment/Exercises/Social%20App%20Seelector/view/liked_posts_screen.dart';
+import 'package:bti_assignment/Exercises/Social%20App%20Seelector/data/post_model.dart';
+
 
 class SocialHomePage extends StatefulWidget {
+
   @override
   State<SocialHomePage> createState() => _SocialHomePageState();
 }
@@ -23,22 +24,20 @@ class _SocialHomePageState extends State<SocialHomePage> {
       selector: (context, provider){
         return SocialProviderData.without(provider.isDark, provider.toggleIsDark, provider.postsModelList);},
       builder: (context, data, child) {
-        final bool isDark = data.isDark;
-        final Function toggleIsDark = data.toggleIsDark;
-        final List<PostModel> postsModelList = data.postsModelList;
 
         return Scaffold(
           appBar: AppBar(
             title: Text("app_name".tr()),
             actions: [
               Switch(
-                value: isDark,
+                value: data.isDark,
                 onChanged: (value) {
-                  toggleIsDark();
+                  data.toggleIsDark();
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: isDark ? Colors.grey[800] : Colors.blue,),
+                style: ElevatedButton.styleFrom(primary: data.isDark ? Colors.grey[800] : Colors.blue,elevation: 0),
+
                   onPressed: () {
                   Locale local = context.locale;
                   bool isArabic = local == Locale("ar");
@@ -80,7 +79,7 @@ class SocialProviderData {
   bool isDark;
   Function toggleIsDark;
   Function? toggleIsLiked;
-  Function? addNewComment;
+  Comment? addNewComment;
   List<PostModel> postsModelList;
 
   SocialProviderData.all(this.isDark, this.toggleIsDark, this.postsModelList, this.toggleIsLiked, this.addNewComment);

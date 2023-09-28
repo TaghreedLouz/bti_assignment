@@ -1,8 +1,8 @@
-import 'package:bti_assignment/Assignments/Ass4%20Social%20Provider/data/post_model.dart';
 import 'package:bti_assignment/Exercises/Social%20App%20Seelector/providers/social_provider.dart';
-import 'package:bti_assignment/Exercises/Social%20App%20Seelector/view/social_home_page.dart';
+import 'package:bti_assignment/Exercises/Social%20App%20Seelector/data/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 
 class PostWidget extends StatelessWidget {
   PostModel postModel;
@@ -14,26 +14,12 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<SocialProvider, SocialProviderData>(
-      selector: (context, provider) {
-        return SocialProviderData.all(
-            provider.isDark,
-            provider.toggleIsDark,
-            provider.postsModelList,
-            provider.toggleIsLiked(postModel),
-            provider.addNewComment(comment) as Function?);
-      },
+    return Consumer<SocialProvider>(
       builder: (context, data, child) {
-        bool isDark = data.isDark;
-        Function toggleIsDark = data.toggleIsDark;
-        Function? toggleIsLiked = data.toggleIsLiked;
-        Function? addNewComment = data.addNewComment;
-        List<PostModel> postsModelList = data.postsModelList;
-
         return Container(
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: isDark ? Colors.grey[700] : Colors.grey[300],
+            color: data.isDark ? Colors.grey[700] : Colors.grey[300],
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
@@ -82,7 +68,7 @@ class PostWidget extends StatelessWidget {
                 SizedBox(height: 15),
                 InkWell(
                   onDoubleTap: () {
-                    toggleIsDark(postModel);
+                    data.toggleIsDark();
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -108,7 +94,7 @@ class PostWidget extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        toggleIsLiked!(postModel);
+                        data.toggleIsLiked!(postModel);
                       },
                       child: Icon(
                         Icons.favorite,
@@ -155,7 +141,7 @@ class PostWidget extends StatelessWidget {
                               //   "isLiked": false,
                               // });
                               if (comment.isNotEmpty)
-                                addNewComment!(comment);
+                                data.addNewComment!(comment);
                              //postModel.comments.add(Provider.of<SocialProvider>(context, listen: false).addNewComment(comment));
                               //postModel.comments?.add(Provider.of<SocialProvider>(context,listen: false).addNewComment(textEditingController.text));
                               // widget.postModel.comments!.length++;
@@ -181,7 +167,7 @@ class PostWidget extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 color:
-                                    isDark ? Colors.grey[400] : Colors.black12,
+                                data.isDark ? Colors.grey[400] : Colors.black12,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Padding(
